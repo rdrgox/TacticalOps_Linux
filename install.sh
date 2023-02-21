@@ -78,7 +78,6 @@ else
     exit 1
 fi
 
-
 if [ ! -d "$patch_to" ]; then
     mkdir "$patch_to"
 fi
@@ -100,4 +99,32 @@ else
     exit 1
 fi
 
+function copying_files() {
+    echo -e "\n\n${blueColour}[!] Copying The Files v220 Linux${endColour}\n"
+    cd "$patch_to"/TacticalOps/TO220/System
+    if cp -r System/* "$game_dir"/TacticalOps/TO350/System/; then
+        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
+    else
+        echo -e "\n\n${redColour}[!] Error al copiar archivos${endColour}\n"
+    fi
+
+    echo -e "\n\n${blueColour}[!] Copying The Files v340 Linux${endColour}\n"
+    cd "$patch_to"/TacticalOps/TO340/System
+    if cp -r System/* "$game_dir"/TacticalOps/TO350/System/; then
+        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
+    else
+        echo -e "\n\n${redColour}[!] Error al copiar archivos${endColour}\n"
+    fi
+
+    echo -e "\n\n${blueColour}[!] Copying The Files v350 Linux${endColour}\n"
+    cd "$patch_to"/TacticalOps/TO350/System
+    if cp -r System/* "$game_dir"/TacticalOps/TO350/System/; then
+        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
+    else
+        echo -e "\n\n${redColour}[!] Error al copiar archivos${endColour}\n"    
+    fi
+}
+
+copying_files
+rm -r "$patch_to"
 

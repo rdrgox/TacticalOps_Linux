@@ -24,27 +24,27 @@ function ctrl_c(){
 # ctrl+c
 trap ctrl_c SIGINT
 
-echo -e "\n\n${greenColour}[!]Verificando dependencias...${endColour}\n"
+echo -e "\n\n${blueColour}[!] Verificando dependencias...${endColour}\n"
 
 if ! which wget >/dev/null; then
-  echo -e "\n\n${greenColour}[+]Instalando wget...${endColour}\n"
+  echo -e "\n\n${greenColour}[+] Instalando wget...${endColour}\n"
     sudo apt-get update
     sudo apt-get install wget -y
 fi
 
 if ! which unzip >/dev/null; then
-  echo -e  "\n\n${greenColour}[+]Instalando unzip...${endColour}\n"
+  echo -e  "\n\n${greenColour}[+] Instalando unzip...${endColour}\n"
     sudo apt-get update
     sudo apt-get install unzip -y
 fi
 
 if ! which 7z >/dev/null; then
-  echo -e  "\n\n${greenColour}[+]Instalando 7z...${endColour}\n"
+  echo -e  "\n\n${greenColour}[+] Instalando 7z...${endColour}\n"
     sudo apt-get update
     sudo apt-get install p7zip-full -y
 fi
 
-echo -e "\n\n${greenColour}[+]Dependencias instaladas...${endColour}\n"
+echo -e "\n\n${greenColour}[+] Dependencias instaladas...${endColour}\n"
 
 if [ ! -d "$HOME/Download" ]; then
     mkdir "$HOME/Download"
@@ -61,10 +61,6 @@ if [ ! -d "$game_dir" ]; then
     mkdir "$game_dir"
 fi
 
-if [ ! -d "$patch_to" ]; then
-    mkdir "$patch_to"
-fi
-
 # Mueve el archivo TO-Fixed-Pack-v469c.7z a ~/TacticalOps
 if [ -f $HOME/Download/"$tov469_7z" ]; then
     cd "$game_dir"
@@ -72,6 +68,19 @@ if [ -f $HOME/Download/"$tov469_7z" ]; then
 else
     echo -e "\n\n${redColour}[!] El archivo "$tov469_7z" no existe en la carpeta Download${endColour}\n"
     exit 1
+fi
+
+if [ -f "$tov469_7z" ]; then
+    7z x "$tov469_7z"
+    rm -r "$tov469_7z"
+else
+    echo "\n\n${redColour}[!] El archivo" $tov469_7z" no existe${endColour}\n"
+    exit 1
+fi
+
+
+if [ ! -d "$patch_to" ]; then
+    mkdir "$patch_to"
 fi
 
 # Mueve el archivo TOFP-LinuxFiles-x64-v6.zip a ~/TO_Linux
@@ -83,18 +92,12 @@ else
     exit 1
 fi
 
-if [ -f "$tov469_7z" ]; then
-    7z x "$tov469_7z"
-    rm -r "$tov469_7z"
-else
-    echo "\n\n${redColour}[!] el archivo"$tov469_7z" no existe${endColour}\n"
-fi
-
-if [ -f"$to_linux_zip"    ]; then
+if [ -f "$to_linux_zip" ]; then
     unzip "$to_linux_zip"   
-    rm -r "$to_linux_zip"   
+    rm -r "$to_linux_zip"
 else
-    echo "\n\n${redColour}[!] el archivo"$to_linux_zip" no existe${endColour}\n"
+    echo "\n\n${redColour}[!] El archivo "$to_linux_zip" no existe${endColour}\n"
+    exit 1
 fi
 
 

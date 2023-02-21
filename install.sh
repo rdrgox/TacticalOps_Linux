@@ -27,10 +27,11 @@ echo -e "\n\n${greenColour}[!] Instalando dependencias...${endColour}\n"
 sudo apt-get update
 sudo apt-get install wget zip p7zip-full -y
 
-if [ $$? -eq 0 ]; then
+if [ $? -eq 0 ]; then
     echo -e "\n\n${greenColour}[+] Las dependencias se han instalado correctamente.${endColour}\n"
 else
     echo -e "\n\n${redColour}[!] Ha ocurrido un error al instalar las dependencias.${endColour}\n"
+    exit 1
 fi
 
 if [ ! -d "$HOME/Download" ]; then
@@ -58,9 +59,9 @@ else
 fi
 
 # Mueve el archivo TOFP-LinuxFiles-x64-v6.zip a ~/TacticalOps
-if [ -f ~/Download/"$to_linux_zip" ]; then
+if [ -f $HOME/Download/"$to_linux_zip" ]; then
     cd "$game_dir"
-    mv ~/Download/"$to_linux_zip" .
+    mv $HOME/Download/"$to_linux_zip" .
 else
     echo -e "\n\n${redColour}[!] El archivo "$to_linux_zip" no existe en la carpeta Download${endColour}\n"
     exit 1
@@ -79,4 +80,6 @@ if [ -f"$to_linux_zip"    ]; then
 else
     echo "\n\n${redColour}[!] el archivo"$to_linux_zip" no existe${endColour}\n"
 fi
+
+
 

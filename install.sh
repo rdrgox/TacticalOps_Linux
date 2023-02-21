@@ -16,6 +16,9 @@ patch_to="$HOME/TO_Linux"
 tov469_7z="TO-Fixed-Pack-v469c.7z"
 to_linux_zip="TOFP-LinuxFiles-x64-v6.zip"
 
+url_tov469="https://drive.google.com/uc?export=download&id=1i4ErENP0Iab14cnLbafabIHZzfQQwYYc&confirm=t"
+url_to_linux="https://drive.google.com/uc?export=download&id=1k52Jw1dNRL2pg8biktuBFzWTeZOyJBI2&confirm=t"
+
 function ctrl_c(){
     echo -e "\n\n${redColour}[!] Saliendo...${endColour}\n"
     exit 1
@@ -52,10 +55,10 @@ fi
 
 # Descargando archivos
 echo -e "\n\n${greenColour}[+] Descargando Tactical Ops Fixed Pack v469c...${endColour}\n"
-wget -c --no-check-certificate "https://drive.google.com/uc?export=download&id=1i4ErENP0Iab14cnLbafabIHZzfQQwYYc&confirm=t" -O ~/Download/TO-Fixed-Pack-v469c.7z
+wget -c --no-check-certificate "$url_tov469" -O ~/Download/TO-Fixed-Pack-v469c.7z
 
 echo -e "\n\n${greenColour}[+] Descargando LinuxFiles-x64-v6...${endColour}\n"
-wget -c --no-check-certificate "https://drive.google.com/uc?export=download&id=1k52Jw1dNRL2pg8biktuBFzWTeZOyJBI2&confirm=t" -O ~/Download/TOFP-LinuxFiles-x64-v6.zip
+wget -c --no-check-certificate "$url_to_linux" -O ~/Download/TOFP-LinuxFiles-x64-v6.zip
 
 if [ ! -d "$game_dir" ]; then
     mkdir "$game_dir"
@@ -101,23 +104,23 @@ fi
 
 function copying_files() {
     echo -e "\n\n${blueColour}[!] Copying The Files v220 Linux${endColour}\n"
-    cd "$patch_to"/TacticalOps/TO220/System
-    if cp -r System/* "$game_dir"/TacticalOps/TO350/System/; then
+    cd "$patch_to"/TacticalOps/TO220
+    if cp -r System/* "$game_dir"/TacticalOps/TO220/System/; then
         echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
     else
         echo -e "\n\n${redColour}[!] Error al copiar archivos${endColour}\n"
     fi
 
     echo -e "\n\n${blueColour}[!] Copying The Files v340 Linux${endColour}\n"
-    cd "$patch_to"/TacticalOps/TO340/System
-    if cp -r System/* "$game_dir"/TacticalOps/TO350/System/; then
+    cd "$patch_to"/TacticalOps/TO340
+    if cp -r System/* "$game_dir"/TacticalOps/TO340/System/; then
         echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
     else
         echo -e "\n\n${redColour}[!] Error al copiar archivos${endColour}\n"
     fi
 
     echo -e "\n\n${blueColour}[!] Copying The Files v350 Linux${endColour}\n"
-    cd "$patch_to"/TacticalOps/TO350/System
+    cd "$patch_to"/TacticalOps/TO350
     if cp -r System/* "$game_dir"/TacticalOps/TO350/System/; then
         echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
     else
@@ -127,4 +130,7 @@ function copying_files() {
 
 copying_files
 rm -r "$patch_to"
+chmod +x "$game_dir"/TacticalOps/TO220/System/TacticalOps.sh
+chmod +x "$game_dir"/TacticalOps/TO340/System/TacticalOps.sh
+chmod +x "$game_dir"/TacticalOps/TO350/System/TacticalOps.sh
 

@@ -11,6 +11,7 @@ turquoiseColour="\e[0;36m\033[1m"
 grayColour="\e[0;37m\033[1m"
 
 game_dir="$HOME/TacticalOps"
+patch_to="$HOME/TO_Linux"
 
 tov469_7z="TO-Fixed-Pack-v469c.7z"
 to_linux_zip="TOFP-LinuxFiles-x64-v6.zip"
@@ -43,6 +44,8 @@ if ! which 7z >/dev/null; then
     sudo apt-get install p7zip-full -y
 fi
 
+echo -e "\n\n${greenColour}[+]Dependencias instaladas...${endColour}\n"
+
 if [ ! -d "$HOME/Download" ]; then
     mkdir "$HOME/Download"
 fi
@@ -58,6 +61,10 @@ if [ ! -d "$game_dir" ]; then
     mkdir "$game_dir"
 fi
 
+if [ ! -d "$patch_to" ]; then
+    mkdir "$patch_to"
+fi
+
 # Mueve el archivo TO-Fixed-Pack-v469c.7z a ~/TacticalOps
 if [ -f $HOME/Download/"$tov469_7z" ]; then
     cd "$game_dir"
@@ -67,9 +74,9 @@ else
     exit 1
 fi
 
-# Mueve el archivo TOFP-LinuxFiles-x64-v6.zip a ~/TacticalOps
+# Mueve el archivo TOFP-LinuxFiles-x64-v6.zip a ~/TO_Linux
 if [ -f $HOME/Download/"$to_linux_zip" ]; then
-    cd "$game_dir"
+    cd "$patch_to"
     mv $HOME/Download/"$to_linux_zip" .
 else
     echo -e "\n\n${redColour}[!] El archivo "$to_linux_zip" no existe en la carpeta Download${endColour}\n"
@@ -89,6 +96,5 @@ if [ -f"$to_linux_zip"    ]; then
 else
     echo "\n\n${redColour}[!] el archivo"$to_linux_zip" no existe${endColour}\n"
 fi
-
 
 

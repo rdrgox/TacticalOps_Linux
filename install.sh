@@ -23,15 +23,24 @@ function ctrl_c(){
 # ctrl+c
 trap ctrl_c SIGINT
 
-echo -e "\n\n${greenColour}[!] Instalando dependencias...${endColour}\n"
-sudo apt-get update
-sudo apt-get install wget zip p7zip-full -y
+echo -e "\n\n${greenColour}[!]Verificando dependencias...${endColour}\n"
 
-if [ $? -eq 0 ]; then
-    echo -e "\n\n${greenColour}[+] Las dependencias se han instalado correctamente.${endColour}\n"
-else
-    echo -e "\n\n${redColour}[!] Ha ocurrido un error al instalar las dependencias.${endColour}\n"
-    exit 1
+if ! which wget >/dev/null; then
+  echo -e "\n\n${greenColour}[+]Instalando wget...${endColour}\n"
+    sudo apt-get update
+    sudo apt-get install wget -y
+fi
+
+if ! which unzip >/dev/null; then
+  echo -e  "\n\n${greenColour}[+]Instalando unzip...${endColour}\n"
+    sudo apt-get update
+    sudo apt-get install unzip -y
+fi
+
+if ! which 7z >/dev/null; then
+  echo -e  "\n\n${greenColour}[+]Instalando 7z...${endColour}\n"
+    sudo apt-get update
+    sudo apt-get install p7zip-full -y
 fi
 
 if [ ! -d "$HOME/Download" ]; then

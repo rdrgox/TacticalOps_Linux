@@ -1,4 +1,5 @@
 #!/bin/bash
+# created by Rodrigo (BlackLung)
 
 #Colours
 greenColour="\e[0;32m\033[1m"
@@ -27,37 +28,37 @@ function ctrl_c(){
 # ctrl+c
 trap ctrl_c SIGINT
 
-echo -e "\n\n${blueColour}[!] Verificando dependencias...${endColour}\n"
+echo -e "\n\n${blueColour}[!] Verifying dependencies...${endColour}\n"
 
 if ! which wget >/dev/null; then
-  echo -e "\n\n${greenColour}[+] Instalando wget...${endColour}\n"
+  echo -e "\n\n${greenColour}[+] Installing wget...${endColour}\n"
     sudo apt-get update
     sudo apt-get install wget -y
 fi
 
 if ! which unzip >/dev/null; then
-  echo -e  "\n\n${greenColour}[+] Instalando unzip...${endColour}\n"
+  echo -e  "\n\n${greenColour}[+] Installing unzip...${endColour}\n"
     sudo apt-get update
     sudo apt-get install unzip -y
 fi
 
 if ! which 7z >/dev/null; then
-  echo -e  "\n\n${greenColour}[+] Instalando 7z...${endColour}\n"
+  echo -e  "\n\n${greenColour}[+] Installing 7z...${endColour}\n"
     sudo apt-get update
     sudo apt-get install p7zip-full -y
 fi
 
-echo -e "\n\n${greenColour}[+] Dependencias instaladas...${endColour}\n"
+echo -e "\n\n${greenColour}[+] Dependencies installed...${endColour}\n"
 
 if [ ! -d "$HOME/Download" ]; then
     mkdir "$HOME/Download"
 fi
 
 # Descargando archivos
-echo -e "\n\n${greenColour}[+] Descargando Tactical Ops Fixed Pack v469c...${endColour}\n"
+echo -e "\n\n${greenColour}[+] Downloading Tactical Ops Fixed Pack v469c...${endColour}\n"
 wget -c --no-check-certificate "$url_tov469" -O ~/Download/TO-Fixed-Pack-v469c.7z
 
-echo -e "\n\n${greenColour}[+] Descargando LinuxFiles-x64-v6...${endColour}\n"
+echo -e "\n\n${greenColour}[+] Downloading LinuxFiles-x64-v6...${endColour}\n"
 wget -c --no-check-certificate "$url_to_linux" -O ~/Download/TOFP-LinuxFiles-x64-v6.zip
 
 if [ ! -d "$game_dir" ]; then
@@ -69,7 +70,7 @@ if [ -f $HOME/Download/"$tov469_7z" ]; then
     cd "$game_dir"
     mv $HOME/Download/"$tov469_7z" .
 else
-    echo -e "\n\n${redColour}[!] El archivo "$tov469_7z" no existe en la carpeta Download${endColour}\n"
+    echo -e "\n\n${redColour}[!] File "$tov469_7z" does not exist in Download folder${endColour}\n"
     exit 1
 fi
 
@@ -77,7 +78,7 @@ if [ -f "$tov469_7z" ]; then
     7z x "$tov469_7z"
     rm -r "$tov469_7z"
 else
-    echo "\n\n${redColour}[!] El archivo" $tov469_7z" no existe${endColour}\n"
+    echo "\n\n${redColour}[!] File "$tov469_7z" does not exist${endColour}\n"
     exit 1
 fi
 
@@ -90,7 +91,7 @@ if [ -f $HOME/Download/"$to_linux_zip" ]; then
     cd "$patch_to"
     mv $HOME/Download/"$to_linux_zip" .
 else
-    echo -e "\n\n${redColour}[!] El archivo "$to_linux_zip" no existe en la carpeta Download${endColour}\n"
+    echo -e "\n\n${redColour}[!] File "$to_linux_zip" does not exist in Download folder${endColour}\n"
     exit 1
 fi
 
@@ -98,7 +99,7 @@ if [ -f "$to_linux_zip" ]; then
     unzip "$to_linux_zip"   
     rm -r "$to_linux_zip"
 else
-    echo "\n\n${redColour}[!] El archivo "$to_linux_zip" no existe${endColour}\n"
+    echo "\n\n${redColour}[!] File "$to_linux_zip"  does not exist${endColour}\n"
     exit 1
 fi
 

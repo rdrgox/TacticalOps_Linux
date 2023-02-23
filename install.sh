@@ -103,13 +103,13 @@ else
 fi
 
 function copying_files() {
-    echo -e "\n\n${blueColour}[!] Copying The Files v220 Linux${endColour}\n"
-    cd "$patch_to"/TacticalOps/TO220
-    if cp -r System/* "$game_dir"/TacticalOps/TO220/System/; then
-        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
-    else
-        echo -e "\n\n${redColour}[!] Error al copiar archivos${endColour}\n"
-    fi
+    #echo -e "\n\n${blueColour}[!] Copying The Files v220 Linux${endColour}\n"
+    #cd "$patch_to"/TacticalOps/TO220
+    #if cp -r System/* "$game_dir"/TacticalOps/TO220/System/; then
+    #    echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
+    #else
+    #    echo -e "\n\n${redColour}[!] Error al copiar archivos${endColour}\n"
+    #fi
 
     echo -e "\n\n${blueColour}[!] Copying The Files v340 Linux${endColour}\n"
     cd "$patch_to"/TacticalOps/TO340

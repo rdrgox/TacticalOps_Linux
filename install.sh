@@ -130,7 +130,7 @@ function copying_files() {
 
 copying_files
 rm -r "$patch_to"
-chmod +x "$game_dir"/TacticalOps/TO220/System/TacticalOps.sh
+#chmod +x "$game_dir"/TacticalOps/TO220/System/TacticalOps.sh
 chmod +x "$game_dir"/TacticalOps/TO340/System/TacticalOps.sh
 chmod +x "$game_dir"/TacticalOps/TO350/System/TacticalOps.sh
 

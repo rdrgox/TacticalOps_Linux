@@ -115,17 +115,17 @@ function copying_files() {
     echo -e "\n\n${blueColour}[!] Copying The Files v340 Linux${endColour}\n"
     cd "$patch_to"/TacticalOps/TO340
     if cp -r System/* "$game_dir"/TacticalOps/TO340/System/; then
-        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
+        echo -e "\n\n${greenColour}[+] Files copied successfully${endColour}\n"
     else
-        echo -e "\n\n${redColour}[!] Error al copiar archivos${endColour}\n"
+        echo -e "\n\n${redColour}[!] File copy error${endColour}\n"
     fi
 
     echo -e "\n\n${blueColour}[!] Copying The Files v350 Linux${endColour}\n"
     cd "$patch_to"/TacticalOps/TO350
     if cp -r System/* "$game_dir"/TacticalOps/TO350/System/; then
-        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
+        echo -e "\n\n${greenColour}[+] Files copied successfully${endColour}\n"
     else
-        echo -e "\n\n${redColour}[!] Error al copiar archivos${endColour}\n"    
+        echo -e "\n\n${redColour}[!] File copy error${endColour}\n"    
     fi
 }
 

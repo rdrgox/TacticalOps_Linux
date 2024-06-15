@@ -27,4 +27,4 @@ WindowedColorBits=32
 Discord [Tactical Ops Community](https://discord.com/invite/EHMfnqr)
 
 ## Appreciation: 
-Special thanks to jo0Oey for hosting the files [tactical-ops.eu](https://tactical-ops.eu)
+Special thanks to **jo0Oey** for hosting the files [tactical-ops.eu](https://tactical-ops.eu)

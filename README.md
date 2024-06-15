@@ -12,6 +12,8 @@ chmod +x install.sh
 
 Change screen if you can't within the game
 ```bash
+nano TacticalOps.ini
+
 WindowedViewportX=1024
 WindowedViewportY=768
 WindowedColorBits=32
@@ -20,4 +22,9 @@ WindowedColorBits=32
 ![TO-Linux](https://github.com/rdrgox/TacticalOps_Linux/assets/37422880/81e5523c-0cd0-43f9-b4fa-427a93f8b96e)
 
 
+## Support
 
+Discord [Tactical Ops Community](https://discord.com/invite/EHMfnqr)
+
+## Appreciation: 
+Special thanks to jo0Oey for hosting the files [tactical-ops.eu](https://tactical-ops.eu)

@@ -1,4 +1,4 @@
-## Tactical Ops: Assault on Terror for Linux
+# Tactical Ops: Assault on Terror for Linux
 
 #### Tested on Ubuntu 22.04 Lts
 
@@ -9,8 +9,8 @@ The original files can be found at page [tactical-ops.eu](https://tactical-ops.e
 chmod +x install.sh
 ./install.sh
 ```
-Change screen if you can't within the game
 
+Change screen if you can't within the game
 ```bash
 WindowedViewportX=1024
 WindowedViewportY=768

@@ -9,3 +9,15 @@ The original files can be found at page [tactical-ops.eu](https://tactical-ops.e
 chmod +x install.sh
 ./install.sh
 ```
+Change screen if you can't within the game
+
+```bash
+WindowedViewportX=1024
+WindowedViewportY=768
+WindowedColorBits=32
+```
+
+![TO-Linux](https://github.com/rdrgox/TacticalOps_Linux/assets/37422880/81e5523c-0cd0-43f9-b4fa-427a93f8b96e)
+
+
+

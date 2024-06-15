@@ -11,7 +11,7 @@ purpleColour="\e[0;35m\033[1m"
 turquoiseColour="\e[0;36m\033[1m"
 grayColour="\e[0;37m\033[1m"
 
-game_dir="$HOME/TacticalOps"
+game_dir="$HOME"
 patch_to="$HOME/TO_Linux"
 
 tov469_7z="TO-Fixed-Pack-v469d.7z"

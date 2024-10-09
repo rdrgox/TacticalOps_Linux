@@ -18,7 +18,7 @@ chmod +x install.sh
 
 ## Troubleshooting
 
-Open: nano TacticalOps.ini
+Open: TacticalOps.ini
 
 - Change screen resolution if unable to do so within the game.
 

@@ -10,13 +10,13 @@ chmod +x install.sh
 ./install.sh
 ```
 
-## run game
+### run game
 
 ```bash
-/TacticalOps/TO3X0/System/TacticalOps.sh
+./TacticalOps/TO3X0/System/TacticalOps.sh
 ```
 
-## Troubleshooting
+### Troubleshooting
 
 Open: TacticalOps.ini
 

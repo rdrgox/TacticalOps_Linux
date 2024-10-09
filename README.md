@@ -10,13 +10,39 @@ chmod +x install.sh
 ./install.sh
 ```
 
-Change screen if you can't within the game
-```bash
-nano TacticalOps.ini
+## run game
 
+```bash
+/TacticalOps/TO3X0/System/TacticalOps.sh
+```
+
+## Troubleshooting
+
+Open: nano TacticalOps.ini
+
+- Change screen resolution if unable to do so within the game.
+
+```bash
+[WinDrv.WindowsClient]
 WindowedViewportX=1024
 WindowedViewportY=768
 WindowedColorBits=32
+```
+
+- Switch to XOpenGLDrv driver if needed.
+
+```bash
+[Engine.Engine]
+GameRenderDevice=XOpenGLDrv.XOpenGLRenderDevice
+WindowedRenderDevice=XOpenGLDrv.XOpenGLRenderDevice
+RenderDevice=XOpenGLDrv.XOpenGLRenderDevice
+```
+
+- Problem with Dual Monitors: disable one monitor or set the game to run on the primary monitor.
+
+```bash
+[WinDrv.WindowsClient]
+StartupFullscreen=False
 ```
 
 ![TO-Linux](https://github.com/rdrgox/TacticalOps_Linux/assets/37422880/81e5523c-0cd0-43f9-b4fa-427a93f8b96e)

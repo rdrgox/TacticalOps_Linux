@@ -50,25 +50,25 @@ fi
 
 echo -e "\n\n${greenColour}[+] Dependencias instaladas...${endColour}\n"
 
-if [ ! -d "$HOME/Download" ]; then
-    mkdir "$HOME/Download"
+if [ ! -d "$HOME/Downloads/" ]; then
+    mkdir "$HOME/Downloads/"
 fi
 
 # Descargando archivos
 echo -e "\n\n${greenColour}[+] Descargando Tactical Ops Fixed Pack v469d...${endColour}\n"
-wget -c --no-check-certificate "$url_tov469" -O "$HOME/Download/$tov469_7z"
+wget -c --no-check-certificate "$url_tov469" -O "$HOME/Downloads//$tov469_7z"
 
 echo -e "\n\n${greenColour}[+] Descargando LinuxFiles...${endColour}\n"
-wget -c --no-check-certificate "$url_to_linux" -O "$HOME/Download/$to_linux_zip"
+wget -c --no-check-certificate "$url_to_linux" -O "$HOME/Downloads//$to_linux_zip"
 
 if [ ! -d "$game_dir" ]; then
     mkdir "$game_dir"
 fi
 
 # Mueve el archivo TO-Fixed-Pack-v469d.7z a ~/TacticalOps
-if [ -f "$HOME/Download/$tov469_7z" ]; then
+if [ -f "$HOME/Downloads//$tov469_7z" ]; then
     cd "$game_dir"
-    mv "$HOME/Download/$tov469_7z" .
+    mv "$HOME/Downloads//$tov469_7z" .
 else
     echo -e "\n\n${redColour}[!] El archivo $tov469_7z no existe en la carpeta de descargas${endColour}\n"
     exit 1
@@ -87,9 +87,9 @@ if [ ! -d "$patch_to" ]; then
 fi
 
 # Mueve el archivo TOFP469d-LinuxFiles.zip a ~/TO_Linux
-if [ -f "$HOME/Download/$to_linux_zip" ]; then
+if [ -f "$HOME/Downloads//$to_linux_zip" ]; then
     cd "$patch_to"
-    mv "$HOME/Download/$to_linux_zip" .
+    mv "$HOME/Downloads//$to_linux_zip" .
 else
     echo -e "\n\n${redColour}[!] El archivo $to_linux_zip no existe en la carpeta de descargas${endColour}\n"
     exit 1

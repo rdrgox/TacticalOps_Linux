@@ -14,10 +14,10 @@ grayColour="\e[0;37m\033[1m"
 game_dir="$HOME"
 patch_to="$HOME/TO_Linux"
 
-tov469_7z="TO-Fixed-Pack-v469d.7z"
+tov469_7z="TO-Fixed-Pack-v469e.7z"
 to_linux_zip="TOFP469d-LinuxFiles.zip"
 
-url_tov469="https://mirror.tactical-ops.eu/client-patches/custom-clients/TO-Fixed-Pack-v469d.7z"
+url_tov469="https://mirror.tactical-ops.eu/client-patches/custom-clients/TO-Fixed-Pack-v469e.7z"
 url_to_linux="https://mirror.tactical-ops.eu/client-patches/custom-clients/fixed-pack-addons/TOFP469d-LinuxFiles.zip"
 
 function ctrl_c(){
@@ -55,10 +55,10 @@ if [ ! -d "$HOME/Downloads/" ]; then
 fi
 
 # Descargando archivos
-echo -e "\n\n${greenColour}[+] Descargando Tactical Ops Fixed Pack v469d...${endColour}\n"
+echo -e "\n\n${greenColour}[+] Download Tactical Ops Fixed Pack v469e...${endColour}\n"
 wget -c --no-check-certificate "$url_tov469" -O "$HOME/Downloads//$tov469_7z"
 
-echo -e "\n\n${greenColour}[+] Descargando LinuxFiles...${endColour}\n"
+echo -e "\n\n${greenColour}[+] Download LinuxFiles...${endColour}\n"
 wget -c --no-check-certificate "$url_to_linux" -O "$HOME/Downloads//$to_linux_zip"
 
 if [ ! -d "$game_dir" ]; then

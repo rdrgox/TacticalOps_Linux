@@ -28,26 +28,49 @@ function ctrl_c(){
 # ctrl+c
 trap ctrl_c SIGINT
 
+install_pkg() {
+    pkg="$1"
+
+    if command -v apt-get >/dev/null 2>&1; then
+        sudo apt-get update
+        sudo apt-get install -y "$pkg"
+
+    elif command -v pacman >/dev/null 2>&1; then
+        sudo pacman -Sy --noconfirm "$pkg"
+
+    elif command -v dnf >/dev/null 2>&1; then
+        sudo dnf install -y "$pkg"
+
+    elif command -v zypper >/dev/null 2>&1; then
+        sudo zypper install -y "$pkg"
+
+    else
+        echo -e "${redColour}[!] No se pudo detectar un gestor de paquetes compatible${endColour}"
+        exit 1
+    fi
+}
+
 echo -e "\n\n${blueColour}[!] Verificando dependencias...${endColour}\n"
 
-if ! which wget >/dev/null; then
-  echo -e "\n\n${greenColour}[+] Instalando wget...${endColour}\n"
-    sudo apt-get update
-    sudo apt-get install wget -y
+if ! command -v wget >/dev/null; then
+    echo -e "\n\n${greenColour}[+] Instalando wget...${endColour}\n"
+    install_pkg wget
 fi
 
 if ! which unzip >/dev/null; then
-  echo -e  "\n\n${greenColour}[+] Instalando unzip...${endColour}\n"
-    sudo apt-get update
-    sudo apt-get install unzip -y
+    echo -e  "\n\n${greenColour}[+] Instalando unzip...${endColour}\n"
+   install_pkg unzip
 fi
 
-if ! which 7z >/dev/null; then
-  echo -e  "\n\n${greenColour}[+] Instalando 7z...${endColour}\n"
-    sudo apt-get update
-    sudo apt-get install p7zip-full -y
-fi
+if ! command -v 7z >/dev/null; then
+    echo -e "\n\n${greenColour}[+] Instalando 7z...${endColour}\n"
 
+    if command -v apt-get >/dev/null; then
+        install_pkg p7zip-full
+    else
+        install_pkg p7zip
+    fi
+fi
 echo -e "\n\n${greenColour}[+] Dependencias instaladas...${endColour}\n"
 
 if [ ! -d "$HOME/Downloads/" ]; then
@@ -65,7 +88,7 @@ if [ ! -d "$game_dir" ]; then
     mkdir "$game_dir"
 fi
 
-# Mueve el archivo TO-Fixed-Pack-v469d.7z a ~/TacticalOps
+# Mueve el archivo TO-Fixed-Pack-v469e.7z a ~/TacticalOps
 if [ -f "$HOME/Downloads//$tov469_7z" ]; then
     cd "$game_dir"
     mv "$HOME/Downloads//$tov469_7z" .

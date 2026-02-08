@@ -95,9 +95,9 @@ if [ ! -d "$game_dir" ]; then
 fi
 
 # Mueve el archivo TO-Fixed-Pack-v469e.7z a ~/TacticalOps
-if [ -f "$HOME/Downloads//$tov469_7z" ]; then
+if [ -f "$HOME/Downloads/$tov469_7z" ]; then
     cd "$game_dir"
-    mv "$HOME/Downloads//$tov469_7z" .
+    mv "$HOME/Downloads/$tov469_7z" .
 else
     echo -e "\n\n${redColour}[!] El archivo $tov469_7z no existe en la carpeta de descargas${endColour}\n"
     exit 1
@@ -124,9 +124,9 @@ if [ ! -d "$patch_to" ]; then
 fi
 
 # Mueve el archivo TOFP469d-LinuxFiles.zip a ~/TO_Linux
-if [ -f "$HOME/Downloads//$to_linux_zip" ]; then
+if [ -f "$HOME/Downloads/$to_linux_zip" ]; then
     cd "$patch_to"
-    mv "$HOME/Downloads//$to_linux_zip" .
+    mv "$HOME/Downloads/$to_linux_zip" .
 else
     echo -e "\n\n${redColour}[!] El archivo $to_linux_zip no existe en la carpeta de descargas${endColour}\n"
     exit 1

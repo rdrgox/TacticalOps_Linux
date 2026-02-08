@@ -28,8 +28,6 @@ chmod +x TacticalOps/TO3X0/System/TacticalOps.sh
 
 ## Troubleshooting
 
-Open: TacticalOps.ini
-
 Audio crash / ALAudio.so issue
 
 If the game crashes or fails during startup with audio-related errors, the problem is related to the `ALAudio.so` library.

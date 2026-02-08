@@ -52,16 +52,19 @@ install_pkg() {
 
 echo -e "\n\n${blueColour}[!] Verificando dependencias...${endColour}\n"
 
+# wget
 if ! command -v wget >/dev/null; then
     echo -e "\n\n${greenColour}[+] Instalando wget...${endColour}\n"
     install_pkg wget
 fi
 
+# unzip
 if ! which unzip >/dev/null; then
     echo -e  "\n\n${greenColour}[+] Instalando unzip...${endColour}\n"
    install_pkg unzip
 fi
 
+# 7z
 if ! command -v 7z >/dev/null; then
     echo -e "\n\n${greenColour}[+] Instalando 7z...${endColour}\n"
 
@@ -71,8 +74,11 @@ if ! command -v 7z >/dev/null; then
         install_pkg p7zip
     fi
 fi
+
 echo -e "\n\n${greenColour}[+] Dependencias instaladas...${endColour}\n"
 
+
+# Crear carpeta Downloads si no existe
 if [ ! -d "$HOME/Downloads/" ]; then
     mkdir "$HOME/Downloads/"
 fi
@@ -97,11 +103,19 @@ else
     exit 1
 fi
 
+# Extrae TO-Fixed-Pack-v469e.7z
 if [ -f "$tov469_7z" ]; then
     7z x "$tov469_7z"
     rm -r "$tov469_7z"
 else
     echo -e "\n\n${redColour}[!] El archivo $tov469_7z no existe${endColour}\n"
+    exit 1
+fi
+
+# Validar extracción
+if [ ! -d "$game_dir/TacticalOps" ]; then
+    echo -e "\n\n${redColour}[!] ERROR: No se encontró la carpeta TacticalOps después de extraer el .7z${endColour}\n"
+    echo -e "${yellowColour}[!] Posible causa: el .7z se extrae con otra estructura de carpetas.${endColour}\n"
     exit 1
 fi
 
@@ -118,6 +132,7 @@ else
     exit 1
 fi
 
+# Extraer zip LinuxFiles
 if [ -f "$to_linux_zip" ]; then
     unzip "$to_linux_zip"   
     rm -r "$to_linux_zip"
@@ -127,24 +142,32 @@ else
 fi
 
 function copying_files() {
+
+    mkdir -p "$game_dir/TacticalOps/TO340/System"
+    mkdir -p "$game_dir/TacticalOps/TO350/System"
+
     echo -e "\n\n${blueColour}[!] Copiando archivos v340 Linux${endColour}\n"
-    cd "$patch_to"/TacticalOps/TO340
-    if cp -r System/* "$game_dir"/TacticalOps/TO340/System/; then
-        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
+
+   if [ -d "$patch_to/TacticalOps/TO340/System" ]; then
+        cp -r "$patch_to/TacticalOps/TO340/System/"* "$game_dir/TacticalOps/TO340/System/" && \
+        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente (TO340)${endColour}\n" || \
+        echo -e "\n\n${redColour}[!] Error al copiar archivos (TO340)${endColour}\n"
     else
-        echo -e "\n\n${redColour}[!] Error al copiar archivos${endColour}\n"
+        echo -e "\n\n${redColour}[!] No existe la carpeta fuente: $patch_to/TacticalOps/TO340/System${endColour}\n"
     fi
 
     echo -e "\n\n${blueColour}[!] Copiando archivos v350 Linux${endColour}\n"
-    cd "$patch_to"/TacticalOps/TO350
-    if cp -r System/* "$game_dir"/TacticalOps/TO350/System/; then
-        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente${endColour}\n"
+
+    if [ -d "$patch_to/TacticalOps/TO350/System" ]; then
+        cp -r "$patch_to/TacticalOps/TO350/System/"* "$game_dir/TacticalOps/TO350/System/" && \
+        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente (TO350)${endColour}\n" || \
+        echo -e "\n\n${redColour}[!] Error al copiar archivos (TO350)${endColour}\n"
     else
-        echo -e "\n\n${redColour}[!] Error al copiar archivos${endColour}\n"    
+        echo -e "\n\n${redColour}[!] No existe la carpeta fuente: $patch_to/TacticalOps/TO350/System${endColour}\n"
     fi
 }
 
 copying_files
 rm -r "$patch_to"
-chmod +x "$game_dir"/TacticalOps/TO340/System/TacticalOps.sh
-chmod +x "$game_dir"/TacticalOps/TO350/System/TacticalOps.sh
+
+echo -e "\n\n${greenColour}[+] Instalación finalizada.${endColour}\n"

@@ -14,7 +14,7 @@ grayColour="\e[0;37m\033[1m"
 game_dir="$HOME"
 patch_to="$HOME/TO_Linux"
 
-tov469_7z="TO-Fixed-Pack-v469e.zip"
+tov469_zip="TO-Fixed-Pack-v469e.zip"
 to_linux_zip="TOFP469d-LinuxFiles.zip"
 
 url_tov469="https://mirror.tactical-ops.eu/client-patches/custom-clients/TO-Fixed-Pack-v469e.zip"
@@ -113,14 +113,14 @@ fi
 
 # Mueve el archivo TOFP469d-LinuxFiles.zip a ~/TO_Linux
 if [ -f "$HOME/Downloads/$to_linux_zip" ]; then
-    cd "$patch_to"
+    cd "$patch_to" || exit 1
     mv "$HOME/Downloads/$to_linux_zip" .
 else
     echo -e "\n\n${redColour}[!] El archivo $to_linux_zip no existe en la carpeta de descargas${endColour}\n"
     exit 1
 fi
 
-# Extraer zip LinuxFiles
+# Extraer LinuxFiles
 if [ -f "$to_linux_zip" ]; then
     unzip "$to_linux_zip"   
     rm -r "$to_linux_zip"

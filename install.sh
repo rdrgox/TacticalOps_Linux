@@ -14,6 +14,9 @@ grayColour="\e[0;37m\033[1m"
 game_dir="$HOME"
 work_dir="$HOME/TO_Installer_Temp"
 
+fixed_dir="$work_dir/fixedpack"
+linux_dir="$work_dir/linuxpatch"
+
 tov469_zip="TO-Fixed-Pack-v469e.zip"
 to_linux_zip="TOFP469d-LinuxFiles.zip"
 
@@ -69,57 +72,62 @@ echo -e "\n\n${greenColour}[+] Dependencias instaladas...${endColour}\n"
 
 # Crear carpeta de trabajo
 rm -rf "$work_dir"
-mkdir -p "$work_dir"
+mkdir -p "$fixed_dir"
+mkdir -p "$linux_dir"
 
 cd "$work_dir" || exit 1
 
 # Descargando archivos
 echo -e "\n\n${greenColour}[+] Download Tactical Ops Fixed Pack v469e...${endColour}\n"
-wget -c --no-check-certificate "$url_tov469" -O "$tov469_zip"
+wget -c --no-check-certificate "$url_tov469" -O "$work_dir/$tov469_zip"
 
 echo -e "\n\n${greenColour}[+] Download LinuxFiles...${endColour}\n"
-wget -c --no-check-certificate "$url_to_linux" -O "$to_linux_zip"
+wget -c --no-check-certificate "$url_to_linux" -O "$work_dir/$to_linux_zip"
 
-echo -e "\n\n${greenColour}[+] Descomprimiendo $tov469_zip...${endColour}\n"
-unzip -o "$tov469_zip"
+# extraer carpetas
+echo -e "\n\n${greenColour}[+] Descomprimiendo Fixed Pack...${endColour}\n"
+unzip -o "$work_dir/$tov469_zip" -d "$fixed_dir"
 
-echo -e "\n\n${greenColour}[+] Descomprimiendo $to_linux_zip...${endColour}\n"
-unzip -o "$to_linux_zip"
+echo -e "\n\n${greenColour}[+] Descomprimiendo LinuxFiles Patch...${endColour}\n"
+unzip -o "$work_dir/$to_linux_zip" -d "$linux_dir"
 
 # Validar extracción
-if [ ! -d "$work_dir/TacticalOps" ]; then
-    echo -e "\n\n${redColour}[!] ERROR: No se encontró la carpeta TacticalOps luego de extraer.${endColour}\n"
-    echo -e "${yellowColour}[!] Puede que el ZIP extraiga con otra estructura de carpetas.${endColour}\n"
+if [ ! -d "$fixed_dir/TacticalOps" ]; then
+    echo -e "\n\n${redColour}[!] ERROR: No se encontró TacticalOps dentro del Fixed Pack.${endColour}\n"
     exit 1
 fi
 
-function copying_files() {
+if [ ! -d "$linux_dir/TacticalOps" ]; then
+    echo -e "\n\n${redColour}[!] ERROR: No se encontró TacticalOps dentro del parche LinuxFiles.${endColour}\n"
+    exit 1
+fi
 
+# Instalar el juego completo (Fixed Pack)
+echo -e "\n\n${blueColour}[!] Instalando Tactical Ops Fixed Pack en $game_dir/TacticalOps ...${endColour}\n"
+mkdir -p "$game_dir/TacticalOps"
+cp -r "$fixed_dir/TacticalOps/"* "$game_dir/TacticalOps/"
+
+# Aplicar parche Linux SOLO a System
+echo -e "\n\n${blueColour}[!] Aplicando parche LinuxFiles (solo System)...${endColour}\n"
+
+# TO340
+if [ -d "$linux_dir/TacticalOps/TO340/System" ]; then
     mkdir -p "$game_dir/TacticalOps/TO340/System"
+    cp -r "$linux_dir/TacticalOps/TO340/System/"* "$game_dir/TacticalOps/TO340/System/"
+    echo -e "\n${greenColour}[+] Parche aplicado TO340${endColour}"
+else
+    echo -e "\n${yellowColour}[!] No se encontró parche TO340/System (se omite)${endColour}"
+fi
+
+# TO350
+if [ -d "$linux_dir/TacticalOps/TO350/System" ]; then
     mkdir -p "$game_dir/TacticalOps/TO350/System"
+    cp -r "$linux_dir/TacticalOps/TO350/System/"* "$game_dir/TacticalOps/TO350/System/"
+    echo -e "\n${greenColour}[+] Parche aplicado TO350${endColour}"
+else
+    echo -e "\n${yellowColour}[!] No se encontró parche TO350/System (se omite)${endColour}"
+fi
 
-    echo -e "\n\n${blueColour}[!] Copiando archivos v340 Linux${endColour}\n"
-
-   if [ -d "$work_dir/TacticalOps/TO340/System" ]; then
-        cp -r "$work_dir/TacticalOps/TO340/System/"* "$game_dir/TacticalOps/TO340/System/" && \
-        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente (TO340)${endColour}\n" || \
-        echo -e "\n\n${redColour}[!] Error al copiar archivos (TO340)${endColour}\n"
-    else
-        echo -e "\n\n${redColour}[!] No existe la carpeta fuente: $patch_to/TacticalOps/TO340/System${endColour}\n"
-    fi
-
-    echo -e "\n\n${blueColour}[!] Copiando archivos v350 Linux${endColour}\n"
-
-    if [ -d "$work_dir/TacticalOps/TO350/System" ]; then
-        cp -r "$work_dir/TacticalOps/TO350/System/"* "$game_dir/TacticalOps/TO350/System/" && \
-        echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente (TO350)${endColour}\n" || \
-        echo -e "\n\n${redColour}[!] Error al copiar archivos (TO350)${endColour}\n"
-    else
-        echo -e "\n\n${redColour}[!] No existe la carpeta fuente: $patch_to/TacticalOps/TO350/System${endColour}\n"
-    fi
-}
-
-copying_files
 rm -rf "$work_dir"
 
 echo -e "\n\n${greenColour}[+] Instalación finalizada.${endColour}\n"

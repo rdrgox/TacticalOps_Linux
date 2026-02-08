@@ -100,8 +100,8 @@ function copying_files() {
 
     echo -e "\n\n${blueColour}[!] Copiando archivos v340 Linux${endColour}\n"
 
-   if [ -d "$patch_to/TacticalOps/TO340/System" ]; then
-        cp -r "$patch_to/TacticalOps/TO340/System/"* "$game_dir/TacticalOps/TO340/System/" && \
+   if [ -d "$work_dir/TacticalOps/TO340/System" ]; then
+        cp -r "$work_dir/TacticalOps/TO340/System/"* "$game_dir/TacticalOps/TO340/System/" && \
         echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente (TO340)${endColour}\n" || \
         echo -e "\n\n${redColour}[!] Error al copiar archivos (TO340)${endColour}\n"
     else
@@ -110,8 +110,8 @@ function copying_files() {
 
     echo -e "\n\n${blueColour}[!] Copiando archivos v350 Linux${endColour}\n"
 
-    if [ -d "$patch_to/TacticalOps/TO350/System" ]; then
-        cp -r "$patch_to/TacticalOps/TO350/System/"* "$game_dir/TacticalOps/TO350/System/" && \
+    if [ -d "$work_dir/TacticalOps/TO350/System" ]; then
+        cp -r "$work_dir/TacticalOps/TO350/System/"* "$game_dir/TacticalOps/TO350/System/" && \
         echo -e "\n\n${greenColour}[+] Archivos copiados exitosamente (TO350)${endColour}\n" || \
         echo -e "\n\n${redColour}[!] Error al copiar archivos (TO350)${endColour}\n"
     else
@@ -120,6 +120,6 @@ function copying_files() {
 }
 
 copying_files
-rm -r "$work_dir"
+rm -rf "$work_dir"
 
 echo -e "\n\n${greenColour}[+] Instalación finalizada.${endColour}\n"

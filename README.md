@@ -3,9 +3,9 @@
 ## Tested on 
 - Ubuntu 22.04 Lts 
 - Fedora Linux 43
-- Arch
+- Arch (audio not working)
 
-This script is based on `TO-Fixed-Pack-v469d.7z` and `TOFP-LinuxFiles.zip` and automates the patch installation for `v3.4.0` and `v3.5.0`.
+This script is based on `TO-Fixed-Pack-v469e.zip` and `TOFP-LinuxFiles.zip` and automates the patch installation for `v3.4.0` and `v3.5.0`.
 
 Original files can be found here:  
 [tactical-ops.eu](https://tactical-ops.eu/to-aot-fixed-pack.php)

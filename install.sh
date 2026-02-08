@@ -14,10 +14,10 @@ grayColour="\e[0;37m\033[1m"
 game_dir="$HOME"
 patch_to="$HOME/TO_Linux"
 
-tov469_7z="TO-Fixed-Pack-v469e.7z"
+tov469_7z="TO-Fixed-Pack-v469e.zip"
 to_linux_zip="TOFP469d-LinuxFiles.zip"
 
-url_tov469="https://mirror.tactical-ops.eu/client-patches/custom-clients/TO-Fixed-Pack-v469e.7z"
+url_tov469="https://mirror.tactical-ops.eu/client-patches/custom-clients/TO-Fixed-Pack-v469e.zip"
 url_to_linux="https://mirror.tactical-ops.eu/client-patches/custom-clients/fixed-pack-addons/TOFP469d-LinuxFiles.zip"
 
 function ctrl_c(){
@@ -64,17 +64,6 @@ if ! which unzip >/dev/null; then
    install_pkg unzip
 fi
 
-# 7z
-if ! command -v 7z >/dev/null; then
-    echo -e "\n\n${greenColour}[+] Instalando 7z...${endColour}\n"
-
-    if command -v apt-get >/dev/null; then
-        install_pkg p7zip-full
-    else
-        install_pkg p7zip
-    fi
-fi
-
 echo -e "\n\n${greenColour}[+] Dependencias instaladas...${endColour}\n"
 
 
@@ -85,37 +74,36 @@ fi
 
 # Descargando archivos
 echo -e "\n\n${greenColour}[+] Download Tactical Ops Fixed Pack v469e...${endColour}\n"
-wget -c --no-check-certificate "$url_tov469" -O "$HOME/Downloads//$tov469_7z"
+wget -c --no-check-certificate "$url_tov469" -O "$HOME/Downloads/$tov469_7z"
 
 echo -e "\n\n${greenColour}[+] Download LinuxFiles...${endColour}\n"
-wget -c --no-check-certificate "$url_to_linux" -O "$HOME/Downloads//$to_linux_zip"
+wget -c --no-check-certificate "$url_to_linux" -O "$HOME/Downloads/$to_linux_zip"
 
 if [ ! -d "$game_dir" ]; then
     mkdir "$game_dir"
 fi
 
-# Mueve el archivo TO-Fixed-Pack-v469e.7z a ~/TacticalOps
-if [ -f "$HOME/Downloads/$tov469_7z" ]; then
-    cd "$game_dir"
-    mv "$HOME/Downloads/$tov469_7z" .
+# Mueve el archivo TO-Fixed-Pack-v469e.zip a ~/TacticalOps
+if [ -f "$HOME/Downloads/$tov469_zip" ]; then
+    cd "$game_dir" || exit 1
+    mv "$HOME/Downloads/$tov469_zip" .
 else
-    echo -e "\n\n${redColour}[!] El archivo $tov469_7z no existe en la carpeta de descargas${endColour}\n"
+    echo -e "\n\n${redColour}[!] El archivo $tov469_zip no existe en la carpeta de descargas${endColour}\n"
     exit 1
 fi
 
-# Extrae TO-Fixed-Pack-v469e.7z
-if [ -f "$tov469_7z" ]; then
-    7z x "$tov469_7z"
-    rm -r "$tov469_7z"
+# Extraer TO-Fixed-Pack-v469e.zip
+if [ -f "$tov469_zip" ]; then
+    unzip -o "$tov469_zip"
+    rm -f "$tov469_zip"
 else
-    echo -e "\n\n${redColour}[!] El archivo $tov469_7z no existe${endColour}\n"
+    echo -e "\n\n${redColour}[!] El archivo $tov469_zip no existe${endColour}\n"
     exit 1
 fi
 
 # Validar extracción
 if [ ! -d "$game_dir/TacticalOps" ]; then
-    echo -e "\n\n${redColour}[!] ERROR: No se encontró la carpeta TacticalOps después de extraer el .7z${endColour}\n"
-    echo -e "${yellowColour}[!] Posible causa: el .7z se extrae con otra estructura de carpetas.${endColour}\n"
+    echo -e "\n\n${redColour}[!] ERROR: No se encontró la carpeta TacticalOps después de extraer el ZIP${endColour}\n"
     exit 1
 fi
 

@@ -12,7 +12,7 @@ turquoiseColour="\e[0;36m\033[1m"
 grayColour="\e[0;37m\033[1m"
 
 game_dir="$HOME"
-patch_to="$HOME/TO_Linux"
+work_dir="$HOME/TO_Installer_Temp"
 
 tov469_zip="TO-Fixed-Pack-v469e.zip"
 to_linux_zip="TOFP469d-LinuxFiles.zip"
@@ -67,65 +67,29 @@ fi
 echo -e "\n\n${greenColour}[+] Dependencias instaladas...${endColour}\n"
 
 
-# Crear carpeta Downloads si no existe
-if [ ! -d "$HOME/Downloads/" ]; then
-    mkdir "$HOME/Downloads/"
-fi
+# Crear carpeta de trabajo
+rm -rf "$work_dir"
+mkdir -p "$work_dir"
+
+cd "$work_dir" || exit 1
 
 # Descargando archivos
 echo -e "\n\n${greenColour}[+] Download Tactical Ops Fixed Pack v469e...${endColour}\n"
-wget -c --no-check-certificate "$url_tov469" -O "$HOME/Downloads/$tov469_7z"
+wget -c --no-check-certificate "$url_tov469" -O "$tov469_zip"
 
 echo -e "\n\n${greenColour}[+] Download LinuxFiles...${endColour}\n"
-wget -c --no-check-certificate "$url_to_linux" -O "$HOME/Downloads/$to_linux_zip"
+wget -c --no-check-certificate "$url_to_linux" -O "$to_linux_zip"
 
-if [ ! -d "$game_dir" ]; then
-    mkdir "$game_dir"
-fi
+echo -e "\n\n${greenColour}[+] Descomprimiendo $tov469_zip...${endColour}\n"
+unzip -o "$tov469_zip"
 
-# Mueve el archivo TO-Fixed-Pack-v469e.zip a ~/TacticalOps
-if [ -f "$HOME/Downloads/$tov469_zip" ]; then
-    cd "$game_dir" || exit 1
-    mv "$HOME/Downloads/$tov469_zip" .
-else
-    echo -e "\n\n${redColour}[!] El archivo $tov469_zip no existe en la carpeta de descargas${endColour}\n"
-    exit 1
-fi
-
-# Extraer TO-Fixed-Pack-v469e.zip
-if [ -f "$tov469_zip" ]; then
-    unzip -o "$tov469_zip"
-    rm -f "$tov469_zip"
-else
-    echo -e "\n\n${redColour}[!] El archivo $tov469_zip no existe${endColour}\n"
-    exit 1
-fi
+echo -e "\n\n${greenColour}[+] Descomprimiendo $to_linux_zip...${endColour}\n"
+unzip -o "$to_linux_zip"
 
 # Validar extracción
-if [ ! -d "$game_dir/TacticalOps" ]; then
-    echo -e "\n\n${redColour}[!] ERROR: No se encontró la carpeta TacticalOps después de extraer el ZIP${endColour}\n"
-    exit 1
-fi
-
-if [ ! -d "$patch_to" ]; then
-    mkdir "$patch_to"
-fi
-
-# Mueve el archivo TOFP469d-LinuxFiles.zip a ~/TO_Linux
-if [ -f "$HOME/Downloads/$to_linux_zip" ]; then
-    cd "$patch_to" || exit 1
-    mv "$HOME/Downloads/$to_linux_zip" .
-else
-    echo -e "\n\n${redColour}[!] El archivo $to_linux_zip no existe en la carpeta de descargas${endColour}\n"
-    exit 1
-fi
-
-# Extraer LinuxFiles
-if [ -f "$to_linux_zip" ]; then
-    unzip "$to_linux_zip"   
-    rm -r "$to_linux_zip"
-else
-    echo -e "\n\n${redColour}[!] El archivo $to_linux_zip no existe${endColour}\n"
+if [ ! -d "$work_dir/TacticalOps" ]; then
+    echo -e "\n\n${redColour}[!] ERROR: No se encontró la carpeta TacticalOps luego de extraer.${endColour}\n"
+    echo -e "${yellowColour}[!] Puede que el ZIP extraiga con otra estructura de carpetas.${endColour}\n"
     exit 1
 fi
 
@@ -156,6 +120,6 @@ function copying_files() {
 }
 
 copying_files
-rm -r "$patch_to"
+rm -r "$work_dir"
 
 echo -e "\n\n${greenColour}[+] Instalación finalizada.${endColour}\n"
